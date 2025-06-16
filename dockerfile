@@ -34,17 +34,23 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Configurar directorio de trabajo
 WORKDIR /var/www/html
 
-# Copiar archivos de configuración primero (para optimizar cache de Docker)
+# Copiar archivos de configuración primero
 COPY composer.json composer.lock ./
 
-# Instalar dependencias de PHP
+# Instalar dependencias PHP (pre-copia)
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # Copiar el resto del código
 COPY . .
 
-# Completar la instalación de Composer
+# Diagnóstico: mostrar contenido de la carpeta auth
+RUN echo "🔍 Listando archivos en views/auth:" && ls -l resources/views/auth || echo "❌ Carpeta no encontrada"
+
+# Reinstalar dependencias
 RUN composer install --no-dev --optimize-autoloader
+
+# Limpiar cachés (Laravel)
+RUN php artisan config:clear && php artisan view:clear
 
 # Crear directorios necesarios y configurar permisos
 RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views \
