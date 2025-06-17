@@ -13,7 +13,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <div class="flex-shrink-0">
+                    <div class="flex items-center space-x-3">
+                        <img src="{{ asset('logo.png') }}" alt="Villarreal Colab Logo" class="w-10 h-10 object-contain">
                         <h1 class="text-2xl font-bold text-indigo-600">Villarreal Colab</h1>
                     </div>
                 </div>
@@ -110,6 +111,10 @@
     <footer class="bg-gray-800 text-white py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <img src="{{ asset('logo.png') }}" alt="Villarreal Colab Logo" class="w-8 h-8 object-contain">
+                    <span class="text-lg font-semibold">Villarreal Colab</span>
+                </div>
                 <p>&copy; {{ date('Y') }} Villarreal Colab. Todos los derechos reservados.</p>
             </div>
         </div>
